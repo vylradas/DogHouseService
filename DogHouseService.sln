@@ -4,14 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogService.API", "DogService.API\DogService.API.csproj", "{2823CC51-2B84-48B8-9AF0-FD8DA72AB9F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6785477-F94A-4C68-9A0D-30F99C580CEB} = {A6785477-F94A-4C68-9A0D-30F99C580CEB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogService.Application", "DogService.Application\DogService.Application.csproj", "{A6785477-F94A-4C68-9A0D-30F99C580CEB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93BBE7B8-8EC2-4E79-9BBE-E742821E062C} = {93BBE7B8-8EC2-4E79-9BBE-E742821E062C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogService.Domain", "DogService.Domain\DogService.Domain.csproj", "{93BBE7B8-8EC2-4E79-9BBE-E742821E062C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogService.Infrastructure", "DogService.Infrastructure\DogService.Infrastructure.csproj", "{0C549B45-372A-4C3E-812E-42E5A03278BD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{93BBE7B8-8EC2-4E79-9BBE-E742821E062C} = {93BBE7B8-8EC2-4E79-9BBE-E742821E062C}
+		{A6785477-F94A-4C68-9A0D-30F99C580CEB} = {A6785477-F94A-4C68-9A0D-30F99C580CEB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogService.Tests", "DogService.Tests\DogService.Tests.csproj", "{3C4AD9DC-4FA6-4751-A10C-E95175FDCBCB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A6785477-F94A-4C68-9A0D-30F99C580CEB} = {A6785477-F94A-4C68-9A0D-30F99C580CEB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

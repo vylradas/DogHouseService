@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DogService.Application.Interfaces;
 using DogService.Domain.Entities;
@@ -12,39 +11,57 @@ namespace DogService.Infrastructure.Repositories
 {
     public class DogRepository : IDogRepository
     {
-        private readonly DogsDbContext _db;
-        public DogRepository(DogsDbContext db) => _db = db;
+        private readonly DogsDbContext _context;
 
-        public async Task<IEnumerable<Dog>> GetDogsAsync(string? attribute, string? order, int pageNumber, int pageSize, CancellationToken ct)
+        public DogRepository(DogsDbContext context)
         {
-            IQueryable<Dog> q = _db.Dogs.AsNoTracking();
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Dog>> GetAllAsync(
+            string? attribute,
+            string? order,
+            int pageNumber,
+            int pageSize,
+            CancellationToken ct)
+        {
+            IQueryable<Dog> query = _context.Dogs.AsNoTracking();
+
             if (!string.IsNullOrWhiteSpace(attribute))
             {
-                var asc = string.Equals(order, "asc", StringComparison.OrdinalIgnoreCase);
-                var desc = string.Equals(order, "desc", StringComparison.OrdinalIgnoreCase);
-                q = attribute.ToLower() switch
+                bool desc = string.Equals(order, "desc", System.StringComparison.OrdinalIgnoreCase);
+                query = attribute.ToLower() switch
                 {
-                    "weight" => desc ? q.OrderByDescending(d => d.Weight) : q.OrderBy(d => d.Weight),
-                    "tail_length" => desc ? q.OrderByDescending(d => d.TailLength) : q.OrderBy(d => d.TailLength),
-                    "name" => desc ? q.OrderByDescending(d => d.Name) : q.OrderBy(d => d.Name),
-                    "color" => desc ? q.OrderByDescending(d => d.Color) : q.OrderBy(d => d.Color),
-                    _ => q
+                    "name" => desc ? query.OrderByDescending(d => d.Name) : query.OrderBy(d => d.Name),
+                    "color" => desc ? query.OrderByDescending(d => d.Color) : query.OrderBy(d => d.Color),
+                    "tail_length" => desc ? query.OrderByDescending(d => d.TailLength) : query.OrderBy(d => d.TailLength),
+                    "weight" => desc ? query.OrderByDescending(d => d.Weight) : query.OrderBy(d => d.Weight),
+                    _ => query
                 };
             }
 
-            q = q.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-            return await q.ToListAsync(ct);
+            query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+            return await query.ToListAsync(ct);
         }
 
-        public async Task<Dog?> GetByNameAsync(string name, CancellationToken ct) =>
-            await _db.Dogs.FirstOrDefaultAsync(d => d.Name == name, ct);
+        // Thin compatibility wrapper
+        public Task<IEnumerable<Dog>> GetDogsAsync(string? attribute, string? order, int pageNumber, int pageSize, CancellationToken ct)
+            => GetAllAsync(attribute, order, pageNumber, pageSize, ct);
+
+        public async Task<Dog?> GetByNameAsync(string name, CancellationToken ct)
+        {
+            return await _context.Dogs.FirstOrDefaultAsync(d => d.Name == name, ct);
+        }
 
         public async Task AddAsync(Dog dog, CancellationToken ct)
         {
-            await _db.Dogs.AddAsync(dog, ct);
-            await _db.SaveChangesAsync(ct);
+            await _context.Dogs.AddAsync(dog, ct);
         }
 
-        public async Task<int> CountAsync(CancellationToken ct) => await _db.Dogs.CountAsync(ct);
+        public async Task SaveChangesAsync(CancellationToken ct)
+        {
+            await _context.SaveChangesAsync(ct);
+        }
     }
 }

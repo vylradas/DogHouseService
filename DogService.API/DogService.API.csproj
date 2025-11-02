@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DogService.Application\DogService.Application.csproj" />
+    <ProjectReference Include="..\DogService.Infrastructure\DogService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

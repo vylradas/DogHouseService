@@ -39,8 +39,8 @@ namespace DogService.Application.Services
             {
                 Name = d.Name,
                 Color = d.Color,
-                tail_length = d.TailLength, // Мапінг для вимоги API
-                weight = d.Weight            // Мапінг для вимоги API
+                TailLength = d.TailLength, // Мапінг для вимоги API
+                Weight = d.Weight            // Мапінг для вимоги API
             }).ToList();
         }
 
@@ -76,8 +76,8 @@ namespace DogService.Application.Services
             {
                 Name = newDog.Name,
                 Color = newDog.Color,
-                tail_length = newDog.TailLength,
-                weight = newDog.Weight
+                TailLength = newDog.TailLength,
+                Weight = newDog.Weight
             };
         }
     }

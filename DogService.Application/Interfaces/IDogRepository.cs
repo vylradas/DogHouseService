@@ -11,7 +11,7 @@ namespace DogService.Application.Interfaces
         Task<IEnumerable<Dog>> GetAllAsync(string? attribute, string? order, int pageNumber, int pageSize, CancellationToken ct);
 
         // Keep the older name as well so other callers don't break — optional thin wrapper in implementation
-        Task<IEnumerable<Dog>> GetDogsAsync(string? attribute, string? order, int pageNumber, int pageSize, CancellationToken ct);
+        // Task<IEnumerable<Dog>> GetDogsAsync(string? attribute, string? order, int pageNumber, int pageSize, CancellationToken ct);
 
         Task<Dog?> GetByNameAsync(string name, CancellationToken ct);
         Task AddAsync(Dog dog, CancellationToken ct);

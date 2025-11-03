@@ -1,4 +1,4 @@
-﻿using DogService.Application.DTOs; // ВИКОРИСТОВУЄМО DTO
+﻿using DogService.Application.DTOs; 
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +17,7 @@ namespace DogService.Application.Interfaces
 
         // Приймає DTO та повертає DTO
         Task<DogResponseDto> CreateDogAsync(DogCreateRequestDto newDogDto, CancellationToken ct);
+        // Task<DogResponseDto> CreateDogAsync(DogCreateRequestDto request, CancellationToken ct);
     }
 }
 

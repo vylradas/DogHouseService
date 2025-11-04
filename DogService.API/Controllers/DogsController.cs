@@ -6,7 +6,7 @@ using System.Threading;
 namespace DogService.API.Controllers
 {
     [ApiController]
-    [Route("dogs")] // Чітко визначимо базовий маршрут
+    [Route("dogs")] // collection route
     public class DogsController : ControllerBase
     {
         private readonly IDogService _service;
@@ -20,7 +20,10 @@ namespace DogService.API.Controllers
             return Ok(dogs);
         }
 
+        // Keep POST at /dogs
         [HttpPost]
+        // Also allow POST at /dog (task requires /dog)
+        [HttpPost("/dog")]
         public async Task<IActionResult> Create([FromBody] DogCreateRequestDto dto, CancellationToken ct = default)
         {
             if (!ModelState.IsValid)
@@ -28,7 +31,6 @@ namespace DogService.API.Controllers
 
             var created = await _service.CreateDogAsync(dto, ct);
 
-            // No GetById endpoint currently — return Created with location left null for now
             return CreatedAtAction(nameof(Get), null, created);
         }
     }

@@ -58,6 +58,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// ENABLE RATE LIMITER middleware (must be called to apply AddRateLimiter configuration)
+app.UseRateLimiter();
+
+// Global exception handling middleware (optional but recommended)
+app.UseMiddleware<DogService.API.Middleware.ExceptionHandlingMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllers();

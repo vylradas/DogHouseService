@@ -9,10 +9,10 @@ xUnit, Moq (юнiт-тестування)
 
 ## Структура проєкту
 ```
-DogService/<br>
-├── DogService.API/             # REST API (Controllers)<br> 
-├── DogService.Application/     # Бізнес-логіка, DTOs, сервіси<br>
-├── DogService.Domain/          # Сутності домену (Dog)<br>
-├── DogService.Infrastructure/  # Репозиторії, DbContext<br>
-└── DogService.Tests/           # Unit-тести<br>
+DogService/
+├── DogService.API/             # REST API (Controllers)
+├── DogService.Application/     # Бізнес-логіка, DTOs, сервіси
+├── DogService.Domain/          # Сутності домену (Dog)
+├── DogService.Infrastructure/  # Репозиторії, DbContext
+└── DogService.Tests/           # Unit-тести
 ```

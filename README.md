@@ -7,7 +7,7 @@ Entity Framework Core
 SQLite (локальна база даних)
 xUnit, Moq (юнiт-тестування)
 
-Структура проєкту
+## Структура проєкту
 DogService/
 ├── DogService.API/             # REST API (Controllers)
 ├── DogService.Application/     # Бізнес-логіка, DTOs, сервіси

@@ -8,9 +8,11 @@ SQLite (локальна база даних)
 xUnit, Moq (юнiт-тестування)
 
 ## Структура проєкту
+```
 DogService/<br>
 ├── DogService.API/             # REST API (Controllers)<br> 
 ├── DogService.Application/     # Бізнес-логіка, DTOs, сервіси<br>
 ├── DogService.Domain/          # Сутності домену (Dog)<br>
 ├── DogService.Infrastructure/  # Репозиторії, DbContext<br>
 └── DogService.Tests/           # Unit-тести<br>
+```
